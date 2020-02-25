@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      @keyframes oh-yes {
+        0% {
+          transform: scale(100%) rotateZ(0);
+        }
+        25% {
+          transform: rotateZ(45deg) skewY(60deg);
+        }
+        50% {
+          transform: rotateZ(-45deg);
+        }
+        100% {
+          transform: scale(50%) rotateZ(0);
+        }
+      }
+      .click-me {
+        display: inline-block;
+        animation-name: 'oh-yes';
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <title>title</title>
+  </head>
+  <body>
+    <iframe
+      id="code-sandbox"
+      src="https://codesandbox.io/embed/new"
+      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+      allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+    ></iframe>
+    <div class="">
+      <label for="input">Github link</label>
+      <input id="input" type="text" placeholder="github link" />
+      <button id="github-button">Load Repo</button>
+      <div class="click-me">&larr; CLICK ME</div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    const sandboxEl = document.getElementById('code-sandbox');
+    const ghButton = document.getElementById('github-button');
+    const ghInput = document.getElementById('input');
+    ghInput.value = 'https://github.com/elhamamini/mjpfp';
+
+    function parseUrl(url) {
+      const urlsplit = url.split('github.com/');
+      return urlsplit[urlsplit.length - 1];
+    }
+
+    ghButton.addEventListener('click', ev => {
+      ev.preventDefault();
+      const slug = parseUrl(input.value);
+      sandboxUrl = `https://codesandbox.io/embed/github/${slug}`;
+      console.log(sandboxUrl);
+      sandboxEl.src = sandboxUrl;
+    });
+  </script>
+</html>
